@@ -91,7 +91,7 @@ def main():
         return 2*x+4*pi*cos(4*pi*x)
         
     def d2f(x):
-        return 2+16*pi**2*sin(4*pi*x)
+        return 2-16*pi**2*sin(4*pi*x)
         
     #plotDf(x,f,"f=x^2 + sin(4\pi x)")
 
@@ -111,12 +111,14 @@ def main():
     pylab.figure()
     pylab.axis([0.0001,1,0.0001,10])
     pylab.loglog(h,eh1,'-o')
-    pylab.legend(['$e_{h1}$'],loc="best")
+    pylab.legend(['$e_{h}$'],loc="best")
+    pylab.title('Error in first derivative')
     
     pylab.figure()
-    pylab.axis([0.0001,1,210,225])    
+    pylab.axis([0.0001,1,.01,100])    
     pylab.loglog(h,eh2,'-o')
-    pylab.legend(['$e_{h2}$'],loc='best')
+    pylab.legend(['$e_{h}$'],loc='best')
+    pylab.title("Error in second derivative")
 
 if __name__ == "__main__":
     main()
