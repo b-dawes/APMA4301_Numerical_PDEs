@@ -158,18 +158,61 @@ and for the second derivative, we get:
 
 Since the third derivative cancels out, we must look at the fourth derivative to find the leading error term. The fourth derivative error term is:
 \begin{equation}
-(h^4s0'/24+0+h^4s2'/24)u^{(4)}(h)=\boxed{\frac{h^2}{12}u^{(4)}(h)}
+(h^4s_0'/24+0+h^4s_2'/24)u^{(4)}(h)=\boxed{\frac{h^2}{12}u^{(4)}(h)}
 \end{equation}
 \section*{Problem 2}
 \subsection*{a)}
 \subsubsection*{i.}
 \includegraphics[width=\linewidth]{3PtStencilError.pdf}
 \subsubsection*{ii.}
+From the above graph, we can see that the first derivative error scales approximately with $h^2$ while the second derivative error scales with $h^{1.5}$. This is confirmed by finding the best polynomial fit using numpy.polyfit. According to the fitting, the first derivative scales as $h^{2.01}$ while the second derivative scales as $h^{1.41}$.
+
 \subsubsection*{iii.}
+In problem 1b), we estimated the error in the first and second derivatives at several different points. The relevant cases are the first case, which corresponds to the endpoints, and the third case, which corresponds to the interior points. From Eqns.\ 12 and 16, we predict the error at both the endpoints and then interior points of the first derivative to scale with $h^2$, which is exactly what we found from our program. 
+
+For the second derivative, Eqn.\ 13 predicts an error of $h$ at the endpoints and Eqn.\ 18 predicts an error of $h^2$. While there are many more interior points than endpoints for small $h$, $h$ is also much larger than $h^2$ and thus each endpoint has a larger impact than an individual interior point. We would expect these effects to balance and yield a scaling somewhere between $h$ and $h^2$, which once again is what we see from our program.
+
 \subsection*{b)}
 \includegraphics[width=\linewidth]{5PtStencilError.pdf}
+
+From the above graph, we can see that the first derivative error scales approximately with $h^4$ while the second derivative error scales with $h^{3.5}$. This is confirmed by finding the best polynomial fit using numpy.polyfit. According to the fitting, the first derivative scales as $h^{4.13}$ while the second derivative scales as $h^{3.30}$.
+
+The errors follow a similar trend to those in part a) but decreased by a factor of $h^2$ since we are using more points in our stencil calculation. The first derivative error is approximately an integer while the second derivative error is slightly higher than expected due to the difference between endpoints and interior points.
+
 \section*{Problem 3}
 \subsection*{a)}
+\begin{equation}
+-\frac{d^2u}{dx^2}=1\ \mathrm{for}\ x\in[0,1],\ u(0)=0,\ u(1)=1
+\end{equation}
+
+We can solve this problem by guessing a solution of the form:
+\begin{equation}
+u(x)=ax^2+bx+c
+\end{equation}
+and solving for appropriate $a$, $b$, and $c$.
+
+First impose $u(0)=0$:
+\begin{equation}
+0+0+c=0\implies c=0
+\end{equation}
+
+Now impose $u(1)=1$:
+\begin{equation}
+a+b=1\implies b=1-a \implies u(x)=ax^2+(1-a)x
+\end{equation}
+
+Finally, impose $-\frac{d^2u}{dx^2}=1$:
+\begin{equation}
+-2a=1\implies a=-\frac{1}{2}
+\end{equation}
+
+So our solution is:
+\begin{equation}
+\boxed{u(x)=\frac{-x^2+3x}{2}}
+\end{equation}
+
 \subsection*{b)}
+\includegraphics[width=\linewidth]{PoissonError.pdf}
 \subsection*{c)}
+From problem 1, we know the error in our first and second derivative calculations will come from third or higher order derivatives. However, our solution (Eqn.\ 24) has zero third and higher derivatives. The only errors in our program then must come from computer rounding errors which are generally of order $10^{-16}$. At each computation this error can be introduced. Since we impose boundary conditions, there is 0 error at the endpoints and the only error comes from the interior points. With a smaller mesh size, there are more interior points and more steps need to be done to reach the points that are further from the endpoints. These computer errors accumulate here causing the error to increase as the number of points increases.
 \end{document}

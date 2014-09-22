@@ -32,14 +32,13 @@ def setD(k,x):
     N = len(x)
     # initialize a sparse NxN matrix in "lil" (linked list) format
     D = sp.lil_matrix((N,N))
-    print x[0:5]
     # assign the k'th derivative at x[0] and x[1]
     D[0,0:5] = fdcoeffF(k,x[0],x[0:5])
     D[1,0:5] = fdcoeffF(k,x[1],x[0:5])
     # assign centered k'th ordered derivatives in the interior
     for i in xrange(2,N-2):
         D[i,i-2:i+3] = fdcoeffF(k,x[i],x[i-2:i+3])
-    # assign one sided k'th derivative at end point x[-1]
+    # assign one sided k'th derivative at end points x[-1] x[-2]
     D[N-1,-5:] = fdcoeffF(k,x[N-1],x[-5:])
     D[N-2,-5:] = fdcoeffF(k,x[N-2],x[-5:])
     
@@ -88,9 +87,13 @@ def main():
         eh1.append(calcError(f,n,1,d1f))
         eh2.append(calcError(f,n,2,d2f))     
         h.append(1.0/n)
-    
-    print eh1
-    print eh2
+        
+            
+    p1 = np.polyfit(np.log(h),np.log(eh1),1)
+    p2 = np.polyfit(np.log(h),np.log(eh2),1)
+
+    print 'p1 = ', p1[0]
+    print 'p2 = ', p2[0]
     
     # Plot error in derivatives
     pylab.figure(1)
@@ -102,8 +105,8 @@ def main():
     pylab.legend(['First derivative','Second derivative'],loc='best')
     pylab.grid()
     pylab.draw()
+    
     pylab.show()
-
 
 if __name__ == "__main__":
     main()

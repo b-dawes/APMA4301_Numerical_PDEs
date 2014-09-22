@@ -55,6 +55,12 @@ def main():
         eh1.append(calcError(f,n,1,d1f))
         eh2.append(calcError(f,n,2,d2f))     
         h.append(1.0/n)
+        
+    p1 = np.polyfit(np.log(h),np.log(eh1),1)
+    p2 = np.polyfit(np.log(h),np.log(eh2),1)
+
+    print 'p1 = ', p1[0]
+    print 'p2 = ', p2[0]
     
     # Plot error in derivatives
     pylab.figure(1)
@@ -66,6 +72,7 @@ def main():
     pylab.legend(['First derivative','Second derivative'],loc='best')
     pylab.grid()
     pylab.draw()
+    
     pylab.show()
 
 
