@@ -1,0 +1,61 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+\title{\vspace{-120 pt}\Large{Klein-Gordon Eqn. for a Massive Photon} \\ \vspace{0 pt} \large{E4301: Project Proposal}}
+\author{Stephen Carr and Brian Dawes}
+\maketitle
+
+\section{Motivation}
+The Klein-Gordon Equation appears in many subfields of physics, most notably in particle physics, where it is the relativistic generalization of the Schr\"odinger Wave equation. We wish to study it in a slightly different context, namely as the generalization of Maxwell's Equations for massive photons. We wish to see how the solutions to the Klein-Gordon forumlation deviate from the classical E\&M results.
+
+\section{Model}
+We will use the following set of equations as our (uncoupled) PDE for the E and B fields in a vacuum (which can be derived from the coupled Massive Maxwell Equations, omitted here):
+\begin{equation}
+\boxed{
+\left(\frac{1}{c^2}\frac{\partial^2}{\partial t^2} - \nabla^2 + m^2\right)
+\begin{pmatrix}
+\vec{E} \\
+\vec{B}
+\end{pmatrix}
+=
+\begin{pmatrix}
+-4\pi\nabla\rho - \frac{4\pi}{c^2}\frac{\partial\vec{j}}{\partial t} \\
+\frac{4\pi}{c}(\nabla\times\vec{j})
+\end{pmatrix}
+}
+\end{equation}
+
+Here, $c$ represents the speed of light, which is the propagation velocity for an EM wave in a vacuum. The $m$ represents the photon's mass (which we will leave as a variable parameter). Our source functions depend on $\rho$, the charge density, and $\vec{j}$, the current density, both of which are functions of position and time. These sources will be fixed, and we will try various combinations in increasing complexity. For very simple sources (i.e. a point charge, a single current carrying wire) analytic solutions exist and can be used as manufactured solutions to test our method.
+
+Note how if $m=0$ these coupled equations reduce back into the classical EM wave equation. There is also a method of writing these equations in terms of the electromagnetic potentials, $V$ and $\vec A$
+\begin{equation}
+\vec B = \nabla\times\vec A
+\label{eqn:BPotential}
+\end{equation}
+\begin{equation}
+\vec E = -\left(\frac{1}{c}\frac{\partial\vec A}{\partial t} + \nabla V\right)
+\label{eqn:EPotential}
+\end{equation}
+
+These potentials then satisfy the following PDE:
+\begin{equation}
+\boxed{
+\left(\frac{1}{c^2}\frac{\partial^2}{\partial t^2} - \nabla^2 + m^2\right)	
+\begin{pmatrix}
+\vec A \\
+V
+\end{pmatrix}
+=
+\begin{pmatrix}
+\vec j / c \\
+\rho
+\end{pmatrix}
+}
+\end{equation}
+
+Although this formulation greatly simplifies the sources, it has the added problem of solving the PDEs for $\vec B$ and $\vec E$ with the computed potentials (Equations \ref{eqn:BPotential} and \ref{eqn:EPotential})
+
+\end{document}
