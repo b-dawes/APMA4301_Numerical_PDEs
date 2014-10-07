@@ -7,3 +7,4 @@ poisson2d_rectangle.py generalizes this problem to an arbitrary rectangle.
 poisson2d_nonuniformMesh.py further generalizes this for different x and y meshes.
 
 poisson2d_neumann.py solves this problem with neumann boundary conditions on the right side of the rectangle.
+Unfortunately this script does not work properly at the neumann boundary and produces a lip here.

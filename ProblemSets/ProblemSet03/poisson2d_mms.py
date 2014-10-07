@@ -28,7 +28,6 @@ def grid_norm2(f,h):
 def calcSolution(m,show_matrix,show_result):
     a = 0.0
     b = 1.0
-    m = 16                   # number of interior points in each direction
     h = (b-a)/(m+1)
     x = np.linspace(a,b,m+2)   # grid points x including boundaries
     y = np.linspace(a,b,m+2)   # grid points y including boundaries
@@ -84,7 +83,7 @@ def calcSolution(m,show_matrix,show_result):
     usoln[1:-1, 1:-1] = uvec.reshape( (m,m) )
     
     # Find errors
-    abs_err = grid_norm2(usoln-u_exact(x,y),h)
+    abs_err = grid_norm2(usoln-u_exact(X,Y),h)
     rel_err = abs_err/grid_norm2(usoln,h)
     print "m = {0}".format(m)
     print "Absolute error = {0:10.3e}, relative error = {1:10.3e}".format(abs_err,rel_err)
@@ -123,6 +122,7 @@ def main():
     pylab.title('Errors in Solving a Poisson Problem')
     pylab.xlabel('Mesh Width')
     pylab.ylabel('Error')
+    pylab.grid()
     pylab.legend(['Absolute Error','Relative Error'],loc='best')
 
 if __name__ == "__main__":

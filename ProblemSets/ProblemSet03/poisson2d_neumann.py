@@ -48,9 +48,9 @@ def calcSolution(ax,bx,ay,by,mx,my,show_matrix,show_result):
     usoln[0,:] = u_exact(ax,y)
 
     # adjust the rhs to include boundary terms: 
-    rhs[:,0] -= usoln[1:,0] / hx**2
-    rhs[:,-1] -= usoln[1:,-1] / hx**2
-    rhs[0,:] -= usoln[0,1:-1] / hy**2
+    rhs[:,0] -= usoln[1:,0] / hy**2
+    rhs[:,-1] -= usoln[1:,-1] / hy**2
+    rhs[0,:] -= usoln[0,1:-1] / hx**2
     # include Neumann term on boundary
     rhs[-1,:] -= 2*u_exact(bx,y[1:-1])/hx
 
@@ -64,8 +64,9 @@ def calcSolution(ax,bx,ay,by,mx,my,show_matrix,show_result):
     exNeumann = ex   # Change last part of bottom diagonal for Neumann conditions
     exNeumann[len(ex)-1] = 2
     ey = np.ones(my)
-    T = sp.spdiags([1/alpha*ey,-2*(alpha+1/alpha)*ey,1/alpha*ey],[-1,0,1],my,my)
-    S = sp.spdiags([alpha*exNeumann,alpha*ex],[-1,1],mx+1,mx+1)
+    T = sp.spdiags([alpha*ey,-2*(alpha+1/alpha)*ey,alpha*ey],[-1,0,1],my,my)
+    S = sp.spdiags([1/alpha*exNeumann,1/alpha*ex],[-1,1],mx+1,mx+1)
+    print S
     A = (sp.kron(Ix,T) + sp.kron(S,Iy)) / (hx*hy)    
     A = A.tocsr()
     

@@ -50,10 +50,10 @@ def calcSolution(ax,bx,ay,by,mx,my,show_matrix,show_result):
     usoln[-1,:] = u_exact(bx,y)
 
     # adjust the rhs to include boundary terms: 
-    rhs[:,0] -= usoln[1:-1,0] / hx**2
-    rhs[:,-1] -= usoln[1:-1,-1] / hx**2
-    rhs[0,:] -= usoln[0,1:-1] / hy**2
-    rhs[-1,:] -= usoln[-1,1:-1] / hy**2
+    rhs[:,0] -= usoln[1:-1,0] / hy**2
+    rhs[:,-1] -= usoln[1:-1,-1] / hy**2
+    rhs[0,:] -= usoln[0,1:-1] / hx**2
+    rhs[-1,:] -= usoln[-1,1:-1] / hx**2
 
 
     # convert the 2d grid function rhs into a column vector for rhs of system:
@@ -64,8 +64,8 @@ def calcSolution(ax,bx,ay,by,mx,my,show_matrix,show_result):
     Iy = sp.eye(my,my)
     ex = np.ones(mx)
     ey = np.ones(my)
-    T = sp.spdiags([1/alpha*ey,-2*(alpha+1/alpha)*ey,1/alpha*ey],[-1,0,1],my,my)
-    S = sp.spdiags([alpha*ex,alpha*ex],[-1,1],mx,mx)
+    T = sp.spdiags([alpha*ey,-2*(alpha+1/alpha)*ey,alpha*ey],[-1,0,1],my,my)
+    S = sp.spdiags([1/alpha*ex,1/alpha*ex],[-1,1],mx,mx)
     A = (sp.kron(Ix,T) + sp.kron(S,Iy)) / (hx*hy)    
     A = A.tocsr()
     
