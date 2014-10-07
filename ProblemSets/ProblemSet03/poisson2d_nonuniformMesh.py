@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Oct  6 20:56:06 2014
+Script to solve the poisson equation with manufactured solution:
+u = exp(x+y/2)
+over [0,2]x[0,1] with nonuniform mesh and dirichlet boundary conditions.
 
 @author: tfuser
 """
@@ -21,15 +24,7 @@ def f(x,y):
 def grid_norm2(f,h):
     return np.sqrt(h)*np.linalg.norm(f, 2)
 
-def main():
-    ax = 0.0
-    bx = 2.0
-    ay = 0.0
-    by = 1.0
-    
-    mx = 16
-    my = 16
-
+def calcSolution(ax,bx,ay,by,mx,my,show_matrix,show_result):
     hx = (bx-ax)/mx    
     hy = (by-ay)/my  
     alpha = hx/hy
@@ -48,11 +43,7 @@ def main():
 
     # set boundary conditions around edges of usoln array:
 
-    usoln = np.zeros(X.shape)     # here we just zero everything  
-                               # This sets full array, but only boundary values
-                               # are used below.  For a problem where utrue
-                               # is not known, would have to set each edge of
-                               # usoln to the desired Dirichlet boundary values.
+    usoln = np.zeros(X.shape) 
     usoln[:,0] = u_exact(x,ay)
     usoln[:,-1] = u_exact(x,by)
     usoln[0,:] = u_exact(ax,y)
@@ -80,43 +71,38 @@ def main():
     
     show_matrix = True
     if (show_matrix):
+        pylab.figure()
         pylab.spy(A,marker='.')
         
-        # Solve the linear system:
-        tic = time.time()
-        uvec = spsolve(A, F)
-        toc = time.time()
+    # Solve the linear system:
+    tic = time.time()
+    uvec = spsolve(A, F)
+    toc = time.time()
+    
+    # reshape vector solution uvec as a grid function and
+    # insert this interior solution into usoln for plotting purposes:
+    # (recall boundary conditions in usoln are already set)
+    
+    usoln[1:-1, 1:-1] = uvec.reshape( (mx,my) )
+    
+    show_result = True
+    if show_result:
+        # plot results:
+        pylab.figure()
+        ax = Axes3D(pylab.gcf())
+        ax.plot_surface(X,Y,usoln, rstride=1, cstride=1, cmap=pylab.cm.jet)
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('u')
+        #pylab.axis([a, b, a, b])
+        #pylab.daspect([1 1 1])
+        pylab.title('Surface plot of computed solution')
         
-        # reshape vector solution uvec as a grid function and
-        # insert this interior solution into usoln for plotting purposes:
-        # (recall boundary conditions in usoln are already set)
+        pylab.show(block=False)
         
-        usoln[1:-1, 1:-1] = uvec.reshape( (mx,my) )
-        
-        # using Linf norm of spectral solution good to 10 significant digits
-        umax_true = 0.07367135328
-        umax = usoln.max()
-        abs_err = abs(umax - umax_true)
-        rel_err = abs_err/umax_true
-        print "m = {0}".format(mx)
-        print "||u||_inf = {0}, ||u_true||_inf={1}".format(umax,umax_true)
-        print "Absolute error = {0:10.3e}, relative error = {1:10.3e}".format(abs_err,rel_err)
-        print 'Elapsed Time = {0} s'.format(toc-tic)
-        
-        show_result = True
-        if show_result:
-            # plot results:
-            pylab.figure()
-            ax = Axes3D(pylab.gcf())
-            ax.plot_surface(X,Y,usoln, rstride=1, cstride=1, cmap=pylab.cm.jet)
-            ax.set_xlabel('x')
-            ax.set_ylabel('y')
-            ax.set_zlabel('u')
-            #pylab.axis([a, b, a, b])
-            #pylab.daspect([1 1 1])
-            pylab.title('Surface plot of computed solution')
+def main():
+    calcSolution(0.0,2.0,0.0,1.0,16,16,True,True)
             
-            pylab.show(block=False)
 
             
 if __name__ == "__main__":

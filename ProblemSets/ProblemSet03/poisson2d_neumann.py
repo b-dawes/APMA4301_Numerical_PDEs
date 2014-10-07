@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Oct  6 20:16:41 2014
+Created on Mon Oct  6 21:19:56 2014
 Script to solve the poisson equation with manufactured solution:
 u = exp(x+y/2)
-over the [0,1]x[0,2] with uniform mesh and dirichlet boundary conditions.
-
+over the [0,2]x[0,1] with a 16x16 point mesh. The rightmost boundary condition
+is neumann while the others are all dirichlet.
 @author: tfuser
 """
 
@@ -24,13 +24,11 @@ def f(x,y):
 def grid_norm2(f,h):
     return np.sqrt(h)*np.linalg.norm(f, 2)
 
-def calcSolution(h,show_matri,show_result):
-    ax = 0.0
-    bx = 2.0
-    ay = 0.0
-    by = 1.0
-    mx = 2.0/h-1
-    my = 1.0/h-1
+def calcSolution(ax,bx,ay,by,mx,my,show_matrix,show_result):
+    hx = (bx-ax)/mx    
+    hy = (by-ay)/my  
+    alpha = hx/hy
+    
     x = np.linspace(ax,bx,mx+2)   # grid points x including boundaries
     y = np.linspace(ay,by,my+2)   # grid points y including boundaries
 
@@ -38,38 +36,40 @@ def calcSolution(h,show_matri,show_result):
     X = X.T                    # transpose so that X(i,j),Y(i,j) are
     Y = Y.T                    # coordinates of (i,j) point
 
-    Xint = X[1:-1,1:-1]        # interior points
-    Yint = Y[1:-1,1:-1]
+    Xint = X[1:,1:-1]        # interior points
+    Yint = Y[1:,1:-1]
     rhs = f(Xint,Yint)         # evaluate f at interior points for right hand side
                            # rhs is modified below for boundary conditions.
 
     # set boundary conditions around edges of usoln array:
-
-    usoln = np.zeros(X.shape)
+    usoln = np.zeros(X.shape)   
     usoln[:,0] = u_exact(x,ay)
     usoln[:,-1] = u_exact(x,by)
     usoln[0,:] = u_exact(ax,y)
-    usoln[-1,:] = u_exact(bx,y)
 
     # adjust the rhs to include boundary terms: 
-    rhs[:,0] -= usoln[1:-1,0] / h**2
-    rhs[:,-1] -= usoln[1:-1,-1] / h**2
-    rhs[0,:] -= usoln[0,1:-1] / h**2
-    rhs[-1,:] -= usoln[-1,1:-1] / h**2
-
+    rhs[:,0] -= usoln[1:,0] / hx**2
+    rhs[:,-1] -= usoln[1:,-1] / hx**2
+    rhs[0,:] -= usoln[0,1:-1] / hy**2
+    # include Neumann term on boundary
+    rhs[-1,:] -= 2*u_exact(bx,y[1:-1])/hx
 
     # convert the 2d grid function rhs into a column vector for rhs of system:
-    F = rhs.reshape((mx*my,1))
+    F = rhs.reshape(((mx+1)*my,1))
+    print F
     
     # form matrix A:
-    Ix = sp.eye(mx,mx)
+    Ix = sp.eye(mx+1,mx+1)
     Iy = sp.eye(my,my)
-    ex = np.ones(mx)
+    ex = np.ones(mx+1)
+    exNeumann = ex   # Change last part of bottom diagonal for Neumann conditions
+    exNeumann[len(ex)-1] = 2
     ey = np.ones(my)
-    T = sp.spdiags([ey,-4.*ey,ey],[-1,0,1],my,my)
-    S = sp.spdiags([ex,ex],[-1,1],mx,mx)
-    A = (sp.kron(Ix,T) + sp.kron(S,Iy)) / h**2    
+    T = sp.spdiags([1/alpha*ey,-2*(alpha+1/alpha)*ey,1/alpha*ey],[-1,0,1],my,my)
+    S = sp.spdiags([alpha*exNeumann,alpha*ex],[-1,1],mx+1,mx+1)
+    A = (sp.kron(Ix,T) + sp.kron(S,Iy)) / (hx*hy)    
     A = A.tocsr()
+    print S 
     
     show_matrix = True
     if (show_matrix):
@@ -85,7 +85,7 @@ def calcSolution(h,show_matri,show_result):
     # insert this interior solution into usoln for plotting purposes:
     # (recall boundary conditions in usoln are already set)
     
-    usoln[1:-1, 1:-1] = uvec.reshape( (mx,my) )
+    usoln[1:, 1:-1] = uvec.reshape( (mx+1,my) )
     
     show_result = True
     if show_result:
@@ -103,7 +103,7 @@ def calcSolution(h,show_matri,show_result):
         pylab.show(block=False)
         
 def main():
-    calcSolution(1.0/16.0,True,True)
+    calcSolution(0.0,2.0,0.0,1.0,16,16,True,True)
             
 if __name__ == "__main__":
     main()
