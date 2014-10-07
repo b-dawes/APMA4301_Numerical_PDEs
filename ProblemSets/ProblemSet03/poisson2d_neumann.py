@@ -56,7 +56,6 @@ def calcSolution(ax,bx,ay,by,mx,my,show_matrix,show_result):
 
     # convert the 2d grid function rhs into a column vector for rhs of system:
     F = rhs.reshape(((mx+1)*my,1))
-    print F
     
     # form matrix A:
     Ix = sp.eye(mx+1,mx+1)
@@ -69,7 +68,6 @@ def calcSolution(ax,bx,ay,by,mx,my,show_matrix,show_result):
     S = sp.spdiags([alpha*exNeumann,alpha*ex],[-1,1],mx+1,mx+1)
     A = (sp.kron(Ix,T) + sp.kron(S,Iy)) / (hx*hy)    
     A = A.tocsr()
-    print S 
     
     show_matrix = True
     if (show_matrix):

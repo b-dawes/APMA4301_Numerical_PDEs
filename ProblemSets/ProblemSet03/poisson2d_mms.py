@@ -120,6 +120,10 @@ def main():
     pylab.figure()
     pylab.loglog(h,abs_err,'-o')
     pylab.loglog(h,rel_err,'-d')
+    pylab.title('Errors in Solving a Poisson Problem')
+    pylab.xlabel('Mesh Width')
+    pylab.ylabel('Error')
+    pylab.legend(['Absolute Error','Relative Error'],loc='best')
 
 if __name__ == "__main__":
     main()
