@@ -61,12 +61,11 @@ def calcSolution(ax,bx,ay,by,mx,my,show_matrix,show_result):
     Ix = sp.eye(mx+1,mx+1)
     Iy = sp.eye(my,my)
     ex = np.ones(mx+1)
-    exNeumann = ex   # Change last part of bottom diagonal for Neumann conditions
-    exNeumann[len(ex)-1] = 2
+    exNeumann = np.ones(mx+1)  # Change last part of bottom diagonal for Neumann conditions
+    exNeumann[len(ex)-2] = 2
     ey = np.ones(my)
     T = sp.spdiags([alpha*ey,-2*(alpha+1/alpha)*ey,alpha*ey],[-1,0,1],my,my)
     S = sp.spdiags([1/alpha*exNeumann,1/alpha*ex],[-1,1],mx+1,mx+1)
-    print S
     A = (sp.kron(Ix,T) + sp.kron(S,Iy)) / (hx*hy)    
     A = A.tocsr()
     
