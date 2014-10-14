@@ -3,66 +3,97 @@
   <length>
     <string_value>short</string_value>
   </length>
-  <owner>mspieg</owner>
+  <owner>bdawes</owner>
   <description>A manufactured solution convergence test for poisson</description>
   <simulations>
-    <simulation name="poisson_mms">
+    <simulation name="poisson_mms_P1">
       <input_file>
-        <string_value lines="1" type="filename">poisson.tfml</string_value>
+        <string_value lines="1" type="filename">poissonP1.tfml</string_value>
       </input_file>
       <parameter_sweep>
         <parameter name="ncells">
-          <values>8 16 32 64 128</values>
+          <values>4 8 16 32 64 128</values>
           <update>
             <string_value lines="20" type="code" language="python">import libspud
 n = int(ncells)
-libspud.set_option("/geometry/mesh::Mesh/source::Rectangle/number_cells", [n, n])</string_value>
+libspud.set_option("/geometry/mesh::Mesh/source::UnitSquare/number_cells", [n, n])</string_value>
             <single_build/>
           </update>
         </parameter>
       </parameter_sweep>
       <variables>
-        <variable name="error_l2">
+        <variable name="error_l2_P1">
           <string_value lines="20" type="code" language="python">from buckettools.statfile import parser
 from math import sqrt
 stat = parser("poisson.stat")
-error_l2 = sqrt(stat["Poisson"]["u"]["L2NormErrorSquared"][-1])</string_value>
+error_l2_P1 = sqrt(abs(stat["Poisson"]["u"]["L2NormErrorSquared"][-1]))</string_value>
+        </variable>
+      </variables>
+    </simulation>
+    <simulation name="poisson_mms_P2">
+      <input_file>
+        <string_value lines="1" type="filename">poissonP2.tfml</string_value>
+      </input_file>
+      <parameter_sweep>
+        <parameter name="ncells">
+          <values>4 8 16 32</values>
+          <update>
+            <string_value lines="20" type="code" language="python">import libspud
+n = int(ncells)
+libspud.set_option("/geometry/mesh::Mesh/source::UnitSquare/number_cells", [n, n])</string_value>
+            <single_build/>
+          </update>
+        </parameter>
+      </parameter_sweep>
+      <variables>
+        <variable name="error_l2_P2">
+          <string_value lines="20" type="code" language="python">from buckettools.statfile import parser
+from math import sqrt
+stat = parser("poisson.stat")
+error_l2_P2 = sqrt(abs(stat["Poisson"]["u"]["L2NormErrorSquared"][-1]))</string_value>
         </variable>
       </variables>
     </simulation>
   </simulations>
   <tests>
-    <test name="error_l2_p1">
+    <test name="error_l2">
       <string_value lines="20" type="code" language="python">import numpy as np
 import pylab as pl
 
 # dump out the full L2 error
-print 'error=',error_l2
+print 'P1 error=',error_l2_P1
+print 'P2 error=',error_l2_P2
 # convert to a flattened numpy array
-error_l2_a = np.array(error_l2[{'degree':['1']}])
+error_l2_P1_a = np.array(error_l2_P1[{'degree':['1']}])
+error_l2_P2_a = np.array(error_l2_P2[{'degree':['1']}])
 #print error_l2_a
 # now make  a pretty convergence plot
     
 # get the mesh spacing from the parameter ncells (ugly but works)
-h = 1./np.array([int(n) for n in error_l2.parameters["ncells"]])  
-print 'h=',h
+h1 = 1./np.array([int(n) for n in error_l2_P1.parameters["ncells"]])  
+h2 = 1./np.array([int(n) for n in error_l2_P2.parameters["ncells"]])
+print 'h1=',h1
+print 'h2=',h2
 
 # log-log plot of the error  
 pl.figure()
-pl.loglog(h,error_l2_a,'bo-')
-pl.xlabel('h')
-pl.ylabel('||e||_2')
+pl.loglog(h1,error_l2_P1_a,'bo-')
+pl.loglog(h2,error_l2_P2_a,'kd-')
+pl.xlabel('Mesh width')
+pl.ylabel('L2 Error')
 pl.grid()
+pl.legend(('P1','P2'))
 
 # calculate best-fit slope on log-log plot
-p=pl.polyfit(np.log(h),np.log(error_l2_a),1)
+p1=pl.polyfit(np.log(h1),np.log(error_l2_P1_a),1)
+p2=pl.polyfit(np.log(h2),np.log(error_l2_P2_a),1)
 
-pl.title('h Convergence, p={0}'.format(p[0]))
+pl.title('Convergence with different DOF: p1={0}, p2={1}'.format(p1[0],p2[0]))
 pl.savefig('poisson_convergence.pdf')
 
 # check convergence
-print "p=",p[0]
-assert(p[0] &gt; 1.9)</string_value>
+print "p1=",p1[0]
+print "p2=",p2[0]</string_value>
     </test>
   </tests>
 </harness_options>
