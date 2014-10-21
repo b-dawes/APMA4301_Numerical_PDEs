@@ -1,0 +1,1 @@
+This directory contains the solutions to problem set 4. The tex and associated pdf are located in the LATEX directory. The tfml and shml files along with the build diretories for the different parts of problem 2 are stored in the folders 2a, 2bi, 2bii, and 2biii respectively.
