@@ -1,0 +1,12 @@
+# Element declaration for Function: VisualizationOnMeshMesh
+vis_e = FiniteElement("CG", triangle, 1)
+
+# Test space declaration for Function: VisualizationOnMeshMesh
+vis_t = TestFunction(vis_e)
+# Trial space declaration for Function: VisualizationOnMeshMesh
+vis_a = TrialFunction(vis_e)
+# Form declaration for form: Bilinear
+a = vis_t*vis_a*dx
+forms = [a]
+
+# Produced by: /home/tfuser/Work/TerraFERMA/bin/systemwrappers_from_options /media/sf_Numerical_PDE_VM_Shared_Folder/repos/git/apma4301_2014_dawes_brian/ProblemSets/ProblemSet04/2biii/poisson.tfml

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<VTKFile type="UnstructuredGrid" version="0.1" byte_order="LittleEndian" compressor="vtkZLibDataCompressor">
+  <UnstructuredGrid>
+    <Piece NumberOfPoints="25" NumberOfCells="32">
+      <Points>
+        <DataArray type="Float64" NumberOfComponents="3" format="binary">AQAAAFgCAAAAAAAASwAAAA==eJx9zbEVwCAMxFA2Y/8uI7i88kZIRaNE0Pn7Ga11e8/+9xGPeMWtc2b6iEe84vyPXfqIR7zivGOXPuIRrzj37NJHPOL9+AtUgi0p
+</DataArray>
+      </Points>
+      <Cells>
+        <DataArray type="UInt32" Name="connectivity" format="binary">AQAAAIABAAAAAAAAZwAAAA==eJxNzEkOgCAQRFGcEAcUcLz/ScXkd1KLTr304jvnXFNvkPW4rTdij/9fh20D7utNOGDrLXjG1ltkV+lFvGLrRdlNertskl7GCVsvyxbpHbhg6134xNa7ZG/pPfjG1ntk33ofeb4EgQ==
+</DataArray>
+        <DataArray type="UInt32" Name="offsets" format="binary">AQAAAIAAAAAAAAAASQAAAA==eJwNw4EGg1AAAMBHRMSIiIiIEREREREREWPEiP3/V3THRSGE2MTUl5m5haWVtY1vWzt7B0cnZxdXN3cPTz9+vfx5+/cBGQ8GMQ==
+</DataArray>
+        <DataArray type="UInt8" Name="types" format="binary">AQAAACAAAAAAAAAACwAAAA==eJxjZcUPAApwAKE=
+</DataArray>
+      </Cells>
+      <PointData Scalars="Error::error">
+        <DataArray type="Float64" Name="Error::error" format="binary">AQAAAMgAAAAAAAAADAAAAA==eJxjYBgeAAAAyAAB
+</DataArray>
+        <DataArray type="Float64" Name="Poisson::u" format="binary">AQAAAMgAAAAAAAAAhAAAAA==eJxjYgCBD/bdjXY2cd1f7JewyfVpJv6y/3Mnfcvc9wwOheEi3Vz7WR0uf93mmqD4yZ6BAGiHmkNIXcP728JL3b/bl5ye3ZeTftKGIYXlCNOEnzYme1w2aX28YsPjuq43LJPBdj7UPT+h7smBuufzrw1vLd5wOzgd9X9m/1bQAQDkCzxx
+</DataArray>
+        <DataArray type="Float64" Name="Poisson::Residualu" format="binary">AQAAAMgAAAAAAAAADAAAAA==eJxjYBgeAAAAyAAB
+</DataArray>
+      </PointData>
+    </Piece>
+  </UnstructuredGrid>
+</VTKFile>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<VTKFile type="UnstructuredGrid" version="0.1" byte_order="LittleEndian" compressor="vtkZLibDataCompressor">
+  <UnstructuredGrid>
+    <Piece NumberOfPoints="25" NumberOfCells="32">
+      <Points>
+        <DataArray type="Float64" NumberOfComponents="3" format="binary">AQAAAFgCAAAAAAAASwAAAA==eJx9zbEVwCAMxFA2Y/8uI7i88kZIRaNE0Pn7Ga11e8/+9xGPeMWtc2b6iEe84vyPXfqIR7zivGOXPuIRrzj37NJHPOL9+AtUgi0p
+</DataArray>
+      </Points>
+      <Cells>
+        <DataArray type="UInt32" Name="connectivity" format="binary">AQAAAIABAAAAAAAAZwAAAA==eJxNzEkOgCAQRFGcEAcUcLz/ScXkd1KLTr304jvnXFNvkPW4rTdij/9fh20D7utNOGDrLXjG1ltkV+lFvGLrRdlNertskl7GCVsvyxbpHbhg6134xNa7ZG/pPfjG1ntk33ofeb4EgQ==
+</DataArray>
+        <DataArray type="UInt32" Name="offsets" format="binary">AQAAAIAAAAAAAAAASQAAAA==eJwNw4EGg1AAAMBHRMSIiIiIEREREREREWPEiP3/V3THRSGE2MTUl5m5haWVtY1vWzt7B0cnZxdXN3cPTz9+vfx5+/cBGQ8GMQ==
+</DataArray>
+        <DataArray type="UInt8" Name="types" format="binary">AQAAACAAAAAAAAAACwAAAA==eJxjZcUPAApwAKE=
+</DataArray>
+      </Cells>
+      <PointData Scalars="Error::error">
+        <DataArray type="Float64" Name="Error::error" format="binary">AQAAAMgAAAAAAAAA0wAAAA==eJwByAA3/+zRBplk/PI82DHLRoxxAz0AAAAAAAAAAETqv0cDZuS88vQid5Ar07wzKDa95qISPZbP0jNkQs2+083MbtRaET8baPLeIOfuPlXDCOOpo0G/dxAgVvwcBz0bB07HD1cOP72olaB2SLQ+xusSxW5kID+vHo6VdbcYP0DEqeGTNgq9a2FMZtha1L6pSZmi3DwVP4+gV30LtPM+kl8+Sy8pRr+ONEhzj4X6PBjsTaVKou28iRR+Mkc72DzIA7cWw/b2POUKKny3Kxk9vcBbNg==
+</DataArray>
+        <DataArray type="Float64" Name="Poisson::u" format="binary">AQAAAMgAAAAAAAAAvAAAAA==eJzjYgCBD/aTG+1s4rq/2K9lk+vTTPxlz3Q3fcvc9wwOpeEi3Vz7WR1uft3mmqD4yf5iRn/2Qvfv9o/mXfKa/eSv/e2kOse3BswOS8OmN+gt5nCYBDXHaqqtTRrQnKcTV4fNA5rzIvu8jA/QnBi1OTFZb7gdKt7fFl4KNMf21KkTAUBzCgryGQUMmR103KynBi3hcDAxv7NhziJ+h9VQ9zBD3VMOdQ/z7w1vLYDm2B/1f2b/VtABAB2rV0c=
+</DataArray>
+        <DataArray type="Float64" Name="Poisson::Residualu" format="binary">AQAAAMgAAAAAAAAAUgAAAA==eJxjYCANcIIICfa9YM4h4b0cINpAfC8LiM4Q3gtT9x8E4oX2soLlhfb+AvEnyuzlB+sXhKvjAxFnBCD645T2SoLoDpm9YPEIObg6QgAAUi0Y5Q==
+</DataArray>
+      </PointData>
+    </Piece>
+  </UnstructuredGrid>
+</VTKFile>

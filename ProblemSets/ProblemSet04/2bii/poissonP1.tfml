@@ -10,7 +10,7 @@
           <integer_value shape="2" dim1="2" rank="1">32 32</integer_value>
         </number_cells>
         <diagonal>
-          <string_value>left</string_value>
+          <string_value>right/left</string_value>
         </diagonal>
         <cell>
           <string_value>triangle</string_value>

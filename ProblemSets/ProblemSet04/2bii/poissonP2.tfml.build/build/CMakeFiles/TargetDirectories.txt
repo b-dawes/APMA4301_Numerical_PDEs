@@ -1,0 +1,4 @@
+/media/sf_Numerical_PDE_VM_Shared_Folder/repos/git/apma4301_2014_dawes_brian/ProblemSets/ProblemSet04/2bii/poissonP2.tfml.build/build/buckettools_ufc/CMakeFiles/buckettools_ufc.dir
+/media/sf_Numerical_PDE_VM_Shared_Folder/repos/git/apma4301_2014_dawes_brian/ProblemSets/ProblemSet04/2bii/poissonP2.tfml.build/build/buckettools_ufc/CMakeFiles/genwrappers.dir
+/media/sf_Numerical_PDE_VM_Shared_Folder/repos/git/apma4301_2014_dawes_brian/ProblemSets/ProblemSet04/2bii/poissonP2.tfml.build/build/CMakeFiles/poissonP2.dir
+/media/sf_Numerical_PDE_VM_Shared_Folder/repos/git/apma4301_2014_dawes_brian/ProblemSets/ProblemSet04/2bii/poissonP2.tfml.build/build/CMakeFiles/run.dir

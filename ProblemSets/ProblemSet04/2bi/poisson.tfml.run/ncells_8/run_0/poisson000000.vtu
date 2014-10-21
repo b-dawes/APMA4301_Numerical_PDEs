@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<VTKFile type="UnstructuredGrid" version="0.1" byte_order="LittleEndian" compressor="vtkZLibDataCompressor">
+  <UnstructuredGrid>
+    <Piece NumberOfPoints="81" NumberOfCells="128">
+      <Points>
+        <DataArray type="Float64" NumberOfComponents="3" format="binary">AQAAAJgHAAAAAAAAwwAAAA==eJx1z7FtxTAMBUBvptGVEVimZPELFik4QhDAFmApx/L0/Exe19/0vP6dgic84JoY6IcXvOX3Pl/be8ETHvBnjvxAP7zgLZ/v/6weeMIDvt5x19EPL3jL732+cdfuCQ/4M0d+oB9e8JbPd9/qgSc84Pu+Kz/QDy94y+99Prhr94QH/JkjP9APL3jL5/u71QNPeMD3vVZ+oB9e8Jbf+/zgrt0THvBnjvxAP7zgLZ/v99UDT3jA9/+v/EA/vOB9+C+K87Nx
+</DataArray>
+      </Points>
+      <Cells>
+        <DataArray type="UInt32" Name="connectivity" format="binary">AQAAAAAGAAAAAAAAJwEAAA==eJxNzsVWQmEAhdFrdwICBioGZREGoSIKCoj4/k+jg/+utQdn7TP8oiiKZv63gqvhz4Yfuxb+XPix6+HPhx+7Ef5C+LGb4S+GH7sV/lL4sdvhL4cfu0PvLiboTWCS3iSm6E3hHr17mKY3jRl6M5ilN4v79B7gIb2HeETvEebozeExvcd4Qu8JntJ7inl683hG7zle0HuBl/ReYoHeAhbpLWKJ3hKW6S1jhd4KXtF7jTf03uAtvbd4R+8dVumtYo3eGtbprWOD3gbe0/uAj/Q+4hO9T9ikt4ktelvYpreNHXo7+EzvM77Q+4pderv4Ru8b9ujt4Tu97/hB7wf26e3jgN4BftL7hUN6hziid4Rjesf4Te83Tuid4A+9Pzild4q///sDf2I8AQ==
+</DataArray>
+        <DataArray type="UInt32" Name="offsets" format="binary">AQAAAAACAAAAAAAA6gAAAA==eJwNwwFEGAEAAMCvlFJKKaWUpimllFJKs5SylFJKKaWUUkoppTSbjRERERERERERETEiIiIiIiIiIiIiou64sCAIIowyxjgTTDLFNDP84ldzzLPAIksss8JvVlljnfU22myr7Xbaba/9DjrsqONOOu2s8/70t3/956JLLrviqmuuu+GmW26746577nvgoUf+99gTTz3z3AsvvfLaG2+9894HH33y2RdfffPdD0NDgiDcSKONNd5Ek0013UyzzDbXfAstttRyK/1utbX+sMEmW2yzwy577HPAIUccc8IpZ5xzwV/+8RPNizXs
+</DataArray>
+        <DataArray type="UInt8" Name="types" format="binary">AQAAAIAAAAAAAAAADAAAAA==eJxjZR1YAAChwAKB
+</DataArray>
+      </Cells>
+      <PointData Scalars="Error::error">
+        <DataArray type="Float64" Name="Error::error" format="binary">AQAAAIgCAAAAAAAADwAAAA==eJxjYBgFo2DgAQACiAAB
+</DataArray>
+        <DataArray type="Float64" Name="Poisson::u" format="binary">AQAAAIgCAAAAAAAApQAAAA==eJyzeK9jFtZ93b7u7PvXDtb37Lmm5f/ZlPHYnrtpzbz3r1/YM4DBB/u2RjubuO4v9nPY5Po0E3/Z/7iTvmXuewaHzHCRbq79rA5lmQ+4BQVuQtWTD7zXxnLeW3uLYnN45eTlotPuUGwOLFwoNUeB4aa9kfgDis15Mdlz8h2FhxSb0x120GCl9SOKzSE3vXz4teGtxRtuB8ej/s/s3wo6AAANklok
+</DataArray>
+        <DataArray type="Float64" Name="Poisson::Residualu" format="binary">AQAAAIgCAAAAAAAADwAAAA==eJxjYBgFo2DgAQACiAAB
+</DataArray>
+      </PointData>
+    </Piece>
+  </UnstructuredGrid>
+</VTKFile>

@@ -1,0 +1,84 @@
+# Element declaration for Function: u
+u_e = FiniteElement("CG", triangle, 2)
+
+# System element is not mixed
+us_e = u_e
+
+# Value declaration for Function: u
+u = Coefficient(u_e)
+# Value declaration for System: Poisson
+us = u
+
+# Last iteration value declaration for Function: u
+u_i = Coefficient(u_e)
+# Last iteration value declaration for System: Poisson
+us_i = u_i
+
+# Previous time-level value declaration for Function: u
+u_n = Coefficient(u_e)
+# Previous time-level value declaration for System: Poisson
+us_n = u_n
+
+# Element declaration for Expression: f
+f_e = FiniteElement("CG", triangle, 2)
+
+# Coefficient declaration for Expression: f
+f = Coefficient(f_e)
+f_i = Coefficient(f_e)
+f_n = Coefficient(f_e)
+
+# Element declaration for Expression: g
+g_e = FiniteElement("CG", triangle, 2)
+
+# Coefficient declaration for Expression: g
+g = Coefficient(g_e)
+g_i = Coefficient(g_e)
+g_n = Coefficient(g_e)
+
+# Element declaration for Expression: AnalyticSolution
+ue_e = FiniteElement("CG", triangle, 2)
+
+# Coefficient declaration for Expression: AnalyticSolution
+ue = Coefficient(ue_e)
+ue_i = Coefficient(ue_e)
+ue_n = Coefficient(ue_e)
+
+
+# Declaring special coefficients, such as the timestep.
+
+
+# Finished declaring functions for this system, start on other systems.
+
+# Function elements declaration for System: Error
+# Element declaration for Function: error
+e_e = FiniteElement("CG", triangle, 1)
+
+# System element is not mixed
+uerr_e = e_e
+
+# Value declaration for Function: error
+e = Coefficient(e_e)
+# Value declaration for System: Error
+uerr = e
+
+# Last iteration value declaration for Function: error
+e_i = Coefficient(e_e)
+# Last iteration value declaration for System: Error
+uerr_i = e_i
+
+# Previous time-level value declaration for Function: error
+e_n = Coefficient(e_e)
+# Previous time-level value declaration for System: Error
+uerr_n = e_n
+
+
+# Finished declaring functions for all other systems, start on forms.
+
+
+# Form declaration for form: L2NormErrorSquared
+e2 = (u-ue)**2*dx
+
+# Declare potentially non-default form names to be accessible
+forms = [e2]
+
+# Produced by: /home/tfuser/Work/TerraFERMA/bin/systemwrappers_from_options /media/sf_Numerical_PDE_VM_Shared_Folder/repos/git/apma4301_2014_dawes_brian/ProblemSets/ProblemSet04/2bii/poisson.tfml
