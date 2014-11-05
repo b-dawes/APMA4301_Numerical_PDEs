@@ -1,0 +1,453 @@
+Command line:
+/media/sf_Numerical_PDE_VM_Shared_Folder/repos/git/apma4301_2014_dawes_brian/ProblemSets/ProblemSet04b/poisson_mms.tfml.build/build/poisson_mms -vINFO -l poisson_mms.tfml 
+Relevant environment variables:
+ none
+terraferma_options/
+  geometry/
+    dimension/
+      __value/
+       <value>: 2 
+        rank: 0
+    mesh::Mesh/
+      name: Mesh
+      source::UnitSquare/
+        name: UnitSquare
+        number_cells/
+          __value/
+           <value>: 32 32 
+            rank: 1
+            shape: 2
+            dim1: 2
+        diagonal/
+          __value: right/left
+        cell/
+          __value: triangle
+  io/
+    output_base_name/
+      __value/
+       <value>: poisson
+        lines: 1
+    visualization/
+      element::P1/
+        name: P1
+        family/
+          __value: CG
+        degree/
+          __value/
+           <value>: 1 
+            rank: 0
+    dump_periods: NULL
+    detectors: NULL
+  global_parameters: NULL
+  system::Poisson/
+    name: Poisson
+    mesh::Mesh/
+      name: Mesh
+    ufl_symbol/
+      __value/
+       <value>: us
+        lines: 1
+    field::u/
+      name: u
+      ufl_symbol/
+        __value/
+         <value>: u
+          lines: 1
+      type::Function/
+        name: Function
+        rank::Scalar/
+          name: Scalar
+          rank: 0
+          element::P1/
+            name: P1
+            family/
+              __value: CG
+            degree/
+              __value/
+               <value>: 1 
+                rank: 0
+          initial_condition::WholeMesh/
+            name: WholeMesh
+            type: initial_condition
+            constant/
+              __value/
+               <value>: 0 
+                rank: 0
+          boundary_condition::homogeneous/
+            name: homogeneous
+            boundary_ids/
+              __value/
+               <value>: 1 3 4 
+                rank: 1
+                shape: 3
+            sub_components::All/
+              name: All
+              type::Dirichlet/
+                name: Dirichlet
+                type: boundary_condition
+                python/
+                  rank: 0
+                  __value/
+                   <value>: from math import exp
+def val(x):
+  global exp
+  return exp(x[0] + x[1]/2.)
+                    lines: 20
+                    type: code
+                    language: python
+      diagnostics/
+        include_in_visualization: NULL
+        include_in_statistics/
+          functional::L2NormErrorSquared/
+            name: L2NormErrorSquared
+            __value/
+             <value>: e2 = (u-ue)**2*dx
+              lines: 20
+              type: code
+              language: python
+            ufl_symbol/
+              __value/
+               <value>: e2
+                lines: 1
+            quadrature_rule::default/
+              name: default
+        include_residual_in_visualization: NULL
+    coefficient::f/
+      name: f
+      ufl_symbol/
+        __value/
+         <value>: f
+          lines: 1
+      type::Expression/
+        name: Expression
+        rank::Scalar/
+          name: Scalar
+          rank: 0
+          element::P1/
+            name: P1
+            family/
+              __value: CG
+            degree/
+              __value/
+               <value>: 1 
+                rank: 0
+          value::WholeMesh/
+            name: WholeMesh
+            type: value
+            python/
+              rank: 0
+              __value/
+               <value>: from math import exp
+def val(x):
+  global exp
+  return -5./4.*exp(x[0] + x[1]/2.)
+                lines: 20
+                type: code
+                language: python
+      diagnostics: NULL
+    coefficient::g/
+      name: g
+      ufl_symbol/
+        __value/
+         <value>: g
+          lines: 1
+      type::Expression/
+        name: Expression
+        rank::Scalar/
+          name: Scalar
+          rank: 0
+          element::P1/
+            name: P1
+            family/
+              __value: CG
+            degree/
+              __value/
+               <value>: 1 
+                rank: 0
+          value::WholeMesh/
+            name: WholeMesh
+            type: value
+            python/
+              rank: 0
+              __value/
+               <value>: from math import exp
+def val(x):
+  global exp
+  return exp(x[0] + x[1]/2.)
+                lines: 20
+                type: code
+                language: python
+      diagnostics: NULL
+    coefficient::AnalyticSolution/
+      name: AnalyticSolution
+      ufl_symbol/
+        __value/
+         <value>: ue
+          lines: 1
+      type::Expression/
+        name: Expression
+        rank::Scalar/
+          name: Scalar
+          rank: 0
+          element::P1/
+            name: P1
+            family/
+              __value: CG
+            degree/
+              __value/
+               <value>: 1 
+                rank: 0
+          value::WholeMesh/
+            name: WholeMesh
+            type: value
+            python/
+              rank: 0
+              __value/
+               <value>: from math import exp
+def val(x):
+  global exp
+  return exp(x[0] + x[1]/2.)
+                lines: 20
+                type: code
+                language: python
+      diagnostics: NULL
+    nonlinear_solver::SNES/
+      name: SNES
+      type::SNES/
+        name: SNES
+        form::Residual/
+          name: Residual
+          rank: 0
+          __value/
+           <value>: F = (inner(grad(u_t),grad(u_i)) - u_t*f)*dx - u_t*g*ds
+            lines: 20
+            type: code
+            language: python
+          ufl_symbol/
+            __value/
+             <value>: F
+              lines: 1
+        form::Jacobian/
+          name: Jacobian
+          rank: 1
+          __value/
+           <value>: J = derivative(F,us_i,us_a)
+            lines: 20
+            type: code
+            language: python
+          ufl_symbol/
+            __value/
+             <value>: J
+              lines: 1
+        quadrature_rule::default/
+          name: default
+        snes_type::ksponly/
+          name: ksponly
+        relative_error/
+          __value/
+           <value>: 1e-07 
+            rank: 0
+        absolute_error/
+          __value/
+           <value>: 1e-16 
+            rank: 0
+        max_iterations/
+          __value/
+           <value>: 20 
+            rank: 0
+        monitors/
+          view_snes: NULL
+          residual: NULL
+        linear_solver/
+          iterative_method::richardson/
+            name: richardson
+            relative_error/
+              __value/
+               <value>: 1e-09 
+                rank: 0
+            absolute_error/
+              __value/
+               <value>: 1e-10 
+                rank: 0
+            max_iterations/
+              __value/
+               <value>: 200 
+                rank: 0
+            zero_initial_guess: NULL
+            monitors/
+              convergence_file: NULL
+          preconditioner::lu/
+            name: lu
+            factorization_package::mumps/
+              name: mumps
+        never_ignore_solver_failures: NULL
+    solve::in_timeloop/
+      name: in_timeloop
+  system::Error/
+    name: Error
+    mesh::Mesh/
+      name: Mesh
+    ufl_symbol/
+      __value/
+       <value>: uerr
+        lines: 1
+    field::error/
+      name: error
+      ufl_symbol/
+        __value/
+         <value>: e
+          lines: 1
+      type::Function/
+        name: Function
+        rank::Scalar/
+          name: Scalar
+          rank: 0
+          element::P1/
+            name: P1
+            family/
+              __value: CG
+            degree/
+              __value/
+               <value>: 1 
+                rank: 0
+          initial_condition::WholeMesh/
+            name: WholeMesh
+            type: initial_condition
+            constant/
+              __value/
+               <value>: 0 
+                rank: 0
+      diagnostics/
+        include_in_visualization: NULL
+    nonlinear_solver::solver/
+      name: solver
+      type::SNES/
+        name: SNES
+        form::Residual/
+          name: Residual
+          rank: 0
+          __value/
+           <value>: F = e_t*(e_i - (u_i - ue))*dx
+            lines: 20
+            type: code
+            language: python
+          ufl_symbol/
+            __value/
+             <value>: F
+              lines: 1
+        form::Jacobian/
+          name: Jacobian
+          rank: 1
+          __value/
+           <value>: J = derivative(F,e_i,e_a)
+            lines: 20
+            type: code
+            language: python
+          ufl_symbol/
+            __value/
+             <value>: J
+              lines: 1
+        quadrature_rule::default/
+          name: default
+        snes_type::ksponly/
+          name: ksponly
+        relative_error/
+          __value/
+           <value>: 1e-10 
+            rank: 0
+        absolute_error/
+          __value/
+           <value>: 1e-20 
+            rank: 0
+        max_iterations/
+          __value/
+           <value>: 20 
+            rank: 0
+        monitors: NULL
+        linear_solver/
+          iterative_method::cg/
+            name: cg
+            relative_error/
+              __value/
+               <value>: 1e-10 
+                rank: 0
+            max_iterations/
+              __value/
+               <value>: 20 
+                rank: 0
+            zero_initial_guess: NULL
+            monitors: NULL
+          preconditioner::sor/
+            name: sor
+        never_ignore_solver_failures: NULL
+    solve::in_timeloop/
+      name: in_timeloop
+Attaching coeffs for system Error
+Attaching coeffs for system Poisson
+Initializing fields and coefficient expressions for system Error
+Initializing fields and coefficient expressions for system Poisson
+Initializing coefficient functions for system Poisson
+Initializing coefficient functions for system Error
+Evaluating initial fields for system Poisson
+Evaluating initial fields for system Error
+Initializing matrices for system Error
+Initializing matrices for system Poisson
+SNES Object:(Poisson_SNES_) 1 MPI processes
+  type: ksponly
+  SNES has not been set up so information may be incomplete
+  maximum iterations=20, maximum function evaluations=10000
+  tolerances: relative=1e-07, absolute=1e-16, solution=1e-08
+  total number of linear solver iterations=0
+  total number of function evaluations=0
+  SNESLineSearch Object:  (Poisson_SNES_)   1 MPI processes
+    type: basic
+    maxstep=1.000000e+08, minlambda=1.000000e-12
+    tolerances: relative=1.000000e-08, absolute=1.000000e-15, lambda=1.000000e-08
+    maximum iterations=1
+  KSP Object:  (Poisson_SNES_)   1 MPI processes
+    type: richardson
+      Richardson: damping factor=1
+    maximum iterations=200, initial guess is zero
+    tolerances:  relative=1e-09, absolute=1e-10, divergence=10000
+    left preconditioning
+    using DEFAULT norm type for convergence test
+  PC Object:  (Poisson_SNES_)   1 MPI processes
+    type: lu
+    PC has not been set up so information may be incomplete
+      LU: out-of-place factorization
+      tolerance for zero pivot 2.22045e-14
+      matrix ordering: nd
+    linear system matrix = precond matrix:
+    Matrix Object:     1 MPI processes
+      type: seqaij
+      rows=1089, cols=1089
+      total: nonzeros=7361, allocated nonzeros=7361
+      total number of mallocs used during MatSetValues calls =0
+        not using I-node routines
+Entering timeloop.
+Timestep numbers: 0 -> 1
+Times: 0.000000 -> 0.000000
+Timestep: 0.000000
+Solving for Poisson::SNES using SNES
+In FormFunction
+  0 SNES Function norm 2.079541142450e+01 
+In FormJacobian
+In FormFunction
+  1 SNES Function norm 5.248510477832e-14 
+Convergence for Poisson::SNES
+SNESConvergedReason 5
+SNES n/o iterations 1
+SNES n/o linear solver iterations 1
+  KSPConvergedReason 3
+  KSP n/o iterations 1
+Solving for Error::solver using SNES
+In FormFunction
+In FormJacobian
+Convergence for Error::solver
+SNESConvergedReason 5
+SNES n/o iterations 1
+SNES n/o linear solver iterations 8
+  KSPConvergedReason 2
+  KSP n/o iterations 8
+Number timesteps reached, terminating timeloop.
+Finished timeloop.

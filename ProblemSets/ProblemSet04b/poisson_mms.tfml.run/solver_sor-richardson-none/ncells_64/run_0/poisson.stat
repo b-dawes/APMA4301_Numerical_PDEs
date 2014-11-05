@@ -1,0 +1,17 @@
+<header>
+<constant name="GitHash" type="string" value="2e732fd0d9b346b1e2ff317325eed14998fa2314 Wed Jun 18 07:56:00 2014 -0400" />
+<constant name="CompileTime" type="string" value="Sep  1 2014 20:46:04" />
+<constant name="StartTime" type="string" value="Tue Nov  4 23:28:59 2014" />
+<constant name="HostName" type="string" value="tfuser-VirtualBox" />
+<field column="1" name="timestep" statistic="value" />
+<field column="2" name="ElapsedTime" statistic="value" />
+<field column="3" name="ElapsedWallTime" statistic="value" />
+<field column="4" name="dt" statistic="value" />
+<field column="5" name="u" statistic="max" system="Poisson" />
+<field column="6" name="u" statistic="min" system="Poisson" />
+<field column="7" name="u" statistic="res_max" system="Poisson" />
+<field column="8" name="u" statistic="res_min" system="Poisson" />
+<field column="9" name="u" statistic="L2NormErrorSquared" system="Poisson" />
+</header>
+0 0.0000000000e+00 1.7232383000e+01 0.0000000000e+00 4.4816890703e+00 0.0000000000e+00 0.0000000000e+00 0.0000000000e+00 5.3482099999e+00 
+1 0.0000000000e+00 1.8165128000e+01 0.0000000000e+00 4.4816890703e+00 5.0397233687e-01 4.0176195704e-15 -6.3972356761e-03 1.2489975851e+00 

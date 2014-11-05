@@ -1,0 +1,27 @@
+<header>
+<constant name="GitHash" type="string" value="2e732fd0d9b346b1e2ff317325eed14998fa2314 Wed Jun 18 07:56:00 2014 -0400" />
+<constant name="CompileTime" type="string" value="Sep  1 2014 20:46:04" />
+<constant name="StartTime" type="string" value="Tue Nov  4 23:23:40 2014" />
+<constant name="HostName" type="string" value="tfuser-VirtualBox" />
+<field column="1" name="timestep" statistic="value" />
+<field column="2" name="ElapsedTime" statistic="value" />
+<field column="3" name="ElapsedWallTime" statistic="value" />
+<field column="4" name="dt" statistic="value" />
+<field column="5" name="NonlinearSystemsIteration" statistic="value" />
+<field column="6" name="NonlinearIteration" statistic="value" />
+<field column="7" name="KSPIteration" statistic="value" />
+<field column="8" name="Poisson" statistic="max" />
+<field column="9" name="Poisson" statistic="min" />
+<field column="10" name="Poisson" statistic="res_max" />
+<field column="11" name="Poisson" statistic="res_min" />
+<field column="12" name="Poisson" statistic="res_norm(l2)" />
+<field column="13" name="Poisson" statistic="res_norm(inf)" />
+<field column="14" name="u" statistic="max" system="Poisson" />
+<field column="15" name="u" statistic="min" system="Poisson" />
+<field column="16" name="u" statistic="res_max" system="Poisson" />
+<field column="17" name="u" statistic="res_min" system="Poisson" />
+<field column="18" name="u" statistic="res_norm(l2)" system="Poisson" />
+<field column="19" name="u" statistic="res_norm(linf)" system="Poisson" />
+</header>
+1 0.0000000000e+00 1.1932664000e+01 0.0000000000e+00 0 0 0 0.0000000000e+00 0.0000000000e+00 6.8540381088e-03 -4.3403212724e+00 2.0795411425e+01 4.3403212724e+00 0.0000000000e+00 0.0000000000e+00 6.8540381088e-03 -4.3403212724e+00 2.0795411425e+01 4.3403212724e+00 
+1 0.0000000000e+00 1.1933687000e+01 0.0000000000e+00 0 0 1 0.0000000000e+00 -4.4119640795e+00 4.5879099131e-15 -6.6613381478e-15 3.7101525996e-14 6.6613381478e-15 0.0000000000e+00 -4.4119640795e+00 4.5879099131e-15 -6.6613381478e-15 3.7101525996e-14 6.6613381478e-15 
