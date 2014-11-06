@@ -9,9 +9,13 @@
 \author{Brian Dawes}
 \maketitle
 
-The number of ksp iterations for each solver and solver time per degree of freedom ($N^2$) for $N=8,16,32,64$ can be found in the below table. The convergence for $N=64$ can be seen in the below graph.
+The number of ksp iterations for each solver and solver time per degree of freedom ($N^2$) for $N=8,16,32,64$ can be found in the below table. The relative errors for $N=64$ can be seen in the first graph. The second graph shows the scaling of the truncation error with problem size.
 
-From the graph, we can see that the LU preconditioned Richardson solves the problem exactly in one step. The two GAMG solvers converge the quickest out of the iterative solvers with CG slightly faster than Richardson. The next quickest are the ILU preconditioned methods, with CG slightly faster than GMRES. CG with no preconditioner is converging to the solution slowly, while unpreconditioned GMRES and SOR preconditioned Richardson both do not appear to be converging (or at least are converging very very slowly).
+From the first graph, we can see that the LU preconditioned Richardson solvers converge in one step. The two GAMG solvers converge the quickest (in terms of iterations) out of the iterative solvers with CG slightly faster than Richardson. The next quickest are the ILU preconditioned methods, with CG slightly faster than GMRES. CG with no preconditioner is converging to the solution slowly, while unpreconditioned GMRES and SOR preconditioned Richardson both do not appear to be converging (or at least are converging very very slowly).
+
+From the second graph, we see that nearly all the solvers converge to the exact solution with very similar errors. The only outliers are SOR preconditioned Richardson, which diverges for $N=32,64$, and GMRES with no preconditioner, which diverges only for $N=64$.
+
+We can see that although GMRES with no preconditioner for $N=32$ and CG with no preconditioner for $N=64$ took all 200 iterations and did not have $||r||_2<$1e-6, they still had truncation errors in line with all the other solvers. Both had relative error of order 1e-5, indicating that we may only need to choose a relative error of 1e-5 instead of 1e-6.
 
 From the table, we see that the LU solvers converge the quickest. Out of the iterative methods, the two GAMG solvers converge the quickest. Since this problem is not very large, the LU sparse direct solvers are the optimal way to solve the problem, with umfpack being the faster of the two. However, as the size of the problem increases, the GAMG preconditioned solvers begin to perform similarly to the LU solvers, indicating that these may be the optimal choice for larger problems.
  
@@ -58,4 +62,5 @@ gamg-richardson-none&64&18&1.377e-08&1.728375e-05&6.999e-06\\
 \hline\end{tabular}
 
 \includegraphics[width=\linewidth]{convergence.pdf}
+\includegraphics[width=\linewidth]{Truncation_Error.pdf}
 \end{document}

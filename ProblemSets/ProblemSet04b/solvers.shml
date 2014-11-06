@@ -130,5 +130,32 @@ section.append(table)
 doc.append(section)
 doc.generate_tex()</string_value>
     </test>
+    <test name="plot_error">
+      <string_value type="code" lines="20" language="python">import numpy as np
+import pylab as pl
+
+
+solvers=residual_l2.parameters["solver"]
+ncells=residual_l2.parameters["ncells"]
+
+
+#error_l2_a = np.array(error_l2[{'degree':['1']}])
+print 'Plotting truncation error'
+pl.figure()
+for s in solvers:
+  print s
+  slice = {"solver":s}
+  print 'ERRORS:'
+  print error_l2[slice]
+  pl.loglog(ncells,error_l2[slice],label=s)
+  pl.hold(True)
+      
+pl.ylabel('||e||_2')
+pl.xlabel('Ncells')
+pl.grid()
+pl.legend(loc='best')
+pl.title('Truncation Error')
+pl.savefig('Truncation_Error.pdf')</string_value>
+    </test>
   </tests>
 </harness_options>
