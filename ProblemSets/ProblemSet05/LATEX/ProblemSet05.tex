@@ -1,0 +1,194 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+\title{APMA 4301: Problem Set 5}
+\author{Brian Dawes}
+\maketitle
+
+\section*{1.}
+\subsection*{(a)}
+\renewcommand{\arraystretch}{1.2}
+\subsubsection*{Forward Euler}
+\begin{equation}
+\begin{array}{c|cc}
+0 & 0 \\
+1 & 1 & 0 \\
+\hline
+ & 0 & 1
+\end{array}
+\end{equation}
+
+\subsubsection*{Backward Euler}
+\begin{equation}
+\begin{array}{c|cc}
+0 & 0 \\
+1 & 0 & 1 \\
+\hline
+& 0 & 1
+\end{array}
+\end{equation}
+
+\subsubsection*{Mid-Point}
+\begin{equation}
+\begin{array}{c|cc}
+0 & 0 \\
+\frac{1}{2} & \frac{1}{2} & 1 \\
+\hline
+& 0 & 1
+\end{array}
+\end{equation}
+
+
+\subsubsection*{Improved Euler (RK2)}
+\begin{equation}
+\begin{array}{c|cc}
+0 & 0 \\
+1 & 1 & 0 \\
+\hline
+& \frac{1}{2} & \frac{1}{2}
+\end{array}
+\end{equation}
+
+
+\subsubsection*{Trapezoidal}
+\begin{equation}
+\begin{array}{c|cc}
+0 & 0 \\
+1 & 0 & 1 \\
+\hline
+& \frac{1}{2} & \frac{1}{2}
+\end{array}
+\end{equation}
+
+\subsubsection*{Classical 4th order Runge-Kutta (RK4)}
+\begin{equation}
+\begin{array}{c|cccc}
+0 & 0 \\
+\frac{1}{2} & \frac{1}{2} & 0 \\
+\frac{1}{2} & 0 & \frac{1}{2} & 0 \\
+1 & 0 & 0 & 1 & 0 \\
+\hline
+& \frac{1}{6} & \frac{1}{3} & \frac{1}{3} & \frac{1}{6}
+\end{array}
+\end{equation}
+
+
+\subsubsection*{TR-BDF2}
+
+\subsection*{(b)}
+\subsubsection*{Forward Euler}
+\begin{equation}
+u_1(k)=(1+z)u_0
+\end{equation}
+
+\subsubsection*{Backward Euler}
+\begin{align}
+u_1(k)&=u_0+zu_1(k) \nonumber\\
+u_1(k)&=\frac{1}{1-z}u_0
+\end{align}
+
+\subsubsection*{Mid-Point}
+\begin{align}
+u_1(k)&=u_0+z/2u_0(k)+zu_1(k) \nonumber\\
+u_1(k)&=\frac{1+z/2}{1-z}u_0
+\end{align}
+
+\subsubsection*{Improved Euler (RK2)}
+\begin{equation}
+u_1(k)=(1+z+z^2/2)u_0
+\end{equation}
+
+\subsubsection*{Trapezoidal}
+\begin{align}
+u_1(k)&=u_0+z/2(u_0+u_1(k)) \nonumber\\
+u_1(k)&=\frac{1+z/2}{1-z/2}u_0
+\end{align}
+
+
+\subsubsection*{Classical 4th order Runge-Kutta (RK4)}
+\begin{align}
+u_1(k)&=(1/6+1/3+z/6+1/3+z/6+z^2/12+1/6+z/6+z^2/12+z^3/12)u_0 \nonumber\\
+&=(1+z/2+z^2/6+z^3/12)u_0
+\end{align}
+
+\subsubsection*{TR-BDF2}
+
+\subsection*{(c)}
+\subsubsection*{Forward Euler}
+\begin{equation}
+e^z-R(z)=z^2/2+O(z^3)
+\end{equation}
+
+\subsubsection*{Backward Euler}
+\begin{align}
+e^z-R(z)&=(1+z+z^2/2+\dots)-(1+z+z^2+\dots) \nonumber\\
+&=-z^2/2+O(z^3)
+\end{align}
+
+\subsubsection*{Mid-Point}
+
+\subsubsection*{Improved Euler (RK2)}
+\begin{equation}
+e^z-R(z)=z^3/6+O(z^4)
+\end{equation}
+
+\subsubsection*{Trapezoidal}
+\begin{align}
+e^z-R(z)&=(1+z+z^2/2+z^3/6\dots)-(1+z+z^2/2+z^3/4\dots) \nonumber\\
+&=-z^3/12+O(z^4)
+\end{align}
+
+\subsubsection*{Classical 4th order Runge-Kutta (RK4)}
+\begin{equation}
+e^z-R(z)=z^5/5!+O(z^6)
+\end{equation}
+
+\subsubsection*{TR-BDF2}
+
+\subsection*{(d)}
+\subsubsection*{Forward Euler}
+
+\subsubsection*{Backward Euler}
+
+\subsubsection*{Mid-Point}
+
+\subsubsection*{Improved Euler (RK2)}
+
+\subsubsection*{Trapezoidal}
+
+\subsubsection*{Classical 4th order Runge-Kutta (RK4)}
+
+\subsubsection*{TR-BDF2}
+
+\subsection*{(e)}
+\subsubsection*{Forward Euler}
+
+\subsubsection*{Backward Euler}
+
+\subsubsection*{Mid-Point}
+
+\subsubsection*{Improved Euler (RK2)}
+
+\subsubsection*{Trapezoidal}
+
+\subsubsection*{Classical 4th order Runge-Kutta (RK4)}
+
+\subsubsection*{TR-BDF2}
+
+\section*{2.}
+\subsection*{(a)}
+
+\subsection*{(b)}
+\subsubsection*{i.}
+
+\subsubsection*{ii.}
+
+\subsubsection*{iii.}
+
+\subsubsection*{iv.}
+
+\subsubsection*{v.}
+\end{document}
