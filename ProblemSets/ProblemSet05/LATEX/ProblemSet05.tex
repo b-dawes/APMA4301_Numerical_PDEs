@@ -9,7 +9,7 @@
 \maketitle
 
 \section*{1.}
-\subsection*{(a)}
+\subsection*{(a) Butcher Tableaus}
 \renewcommand{\arraystretch}{1.2}
 \subsubsection*{Forward Euler}
 \begin{equation}
@@ -35,7 +35,7 @@
 \begin{equation}
 \begin{array}{c|cc}
 0 & 0 \\
-\frac{1}{2} & \frac{1}{2} & 1 \\
+\frac{1}{2} & \frac{1}{2} & 0 \\
 \hline
 & 0 & 1
 \end{array}
@@ -78,7 +78,7 @@
 
 \subsubsection*{TR-BDF2}
 
-\subsection*{(b)}
+\subsection*{(b) Explicit Form}
 \subsubsection*{Forward Euler}
 \begin{equation}
 u_1(k)=(1+z)u_0
@@ -91,10 +91,9 @@ u_1(k)&=\frac{1}{1-z}u_0
 \end{align}
 
 \subsubsection*{Mid-Point}
-\begin{align}
-u_1(k)&=u_0+z/2u_0(k)+zu_1(k) \nonumber\\
-u_1(k)&=\frac{1+z/2}{1-z}u_0
-\end{align}
+\begin{equation}
+u_1(k)=(1+z+z^2/2)u_0
+\end{equation}
 
 \subsubsection*{Improved Euler (RK2)}
 \begin{equation}
@@ -107,7 +106,6 @@ u_1(k)&=u_0+z/2(u_0+u_1(k)) \nonumber\\
 u_1(k)&=\frac{1+z/2}{1-z/2}u_0
 \end{align}
 
-
 \subsubsection*{Classical 4th order Runge-Kutta (RK4)}
 \begin{align}
 u_1(k)&=(1/6+1/3+z/6+1/3+z/6+z^2/12+1/6+z/6+z^2/12+z^3/12)u_0 \nonumber\\
@@ -116,7 +114,7 @@ u_1(k)&=(1/6+1/3+z/6+1/3+z/6+z^2/12+1/6+z/6+z^2/12+z^3/12)u_0 \nonumber\\
 
 \subsubsection*{TR-BDF2}
 
-\subsection*{(c)}
+\subsection*{(c) Step Error}
 \subsubsection*{Forward Euler}
 \begin{equation}
 e^z-R(z)=z^2/2+O(z^3)
@@ -129,6 +127,9 @@ e^z-R(z)&=(1+z+z^2/2+\dots)-(1+z+z^2+\dots) \nonumber\\
 \end{align}
 
 \subsubsection*{Mid-Point}
+\begin{equation}
+e^z-R(z)=z^3/6+O(z^4)
+\end{equation}
 
 \subsubsection*{Improved Euler (RK2)}
 \begin{equation}
@@ -148,7 +149,7 @@ e^z-R(z)=z^5/5!+O(z^6)
 
 \subsubsection*{TR-BDF2}
 
-\subsection*{(d)}
+\subsection*{(d) Stability Plots}
 \subsubsection*{Forward Euler}
 
 \subsubsection*{Backward Euler}
@@ -163,32 +164,82 @@ e^z-R(z)=z^5/5!+O(z^6)
 
 \subsubsection*{TR-BDF2}
 
-\subsection*{(e)}
+\subsection*{(e) Stable Time Steps}
 \subsubsection*{Forward Euler}
+\begin{equation}
+|1+\lambda k_{max}|=1\implies k_{max}=-\frac{2}{\lambda}
+\end{equation}
 
 \subsubsection*{Backward Euler}
+\begin{equation}
+|\frac{1}{1-\lambda k_{max}}|=1\implies k_{maz}=\infty
+\end{equation}
 
 \subsubsection*{Mid-Point}
+\begin{equation}
+|1+\lambda k_{max}+(\lambda k_{max})^2/2|=1\implies k_{max}=-\frac{1}{\lambda}
+\end{equation}
 
 \subsubsection*{Improved Euler (RK2)}
+\begin{equation}
+|1+\lambda k_{max}+(\lambda k_{max})^2/2|=1\implies k_{max}=-\frac{1}{\lambda}
+\end{equation}
 
 \subsubsection*{Trapezoidal}
+\begin{equation}
+|\frac{1+\lambda k_{max}/2}{1-\lambda k_{max}/2}|=1\implies k_{maz}=\infty
+\end{equation}
 
 \subsubsection*{Classical 4th order Runge-Kutta (RK4)}
 
 \subsubsection*{TR-BDF2}
 
 \section*{2.}
+\begin{equation}
+\frac{\partial T}{\partial t}=\nabla^2T;\quad T(\mathbf x,0)=A\exp\left[\frac{-\mathbf{x}^T\mathbf{x}}{\sigma^2}\right]
+\end{equation}
+
 \subsection*{(a)}
+\begin{equation}
+T(\mathbf{x},t)=\frac{A}{1+2t/\sigma^2}\exp\left[\frac{\mathbf{x}^T\mathbf x}{\sigma^2+4t}\right]
+\end{equation}
+This obviously satisfies the initial condition at $t=0$.
+
+\begin{equation}
+\frac{\partial T}{\partial t}=\frac{A}{1+2t/\sigma^2}\left[\frac{4\mathbf{x}^T\mathbf{x}}{(\sigma^2+4t)^2}-\frac{2}{\sigma^2+4t}\right]\exp\left[\frac{\mathbf{x}^T\mathbf x}{\sigma^2+4t}\right]=\nabla^2T
+\end{equation}
 
 \subsection*{(b)}
 \subsubsection*{i.}
+\begin{align}
+F(u_i)&=\int_\Omega u_t[u_i-u_n+(1-\theta)\nabla^2 u_n+\theta\nabla u_i^2]\,d\mathbf x \nonumber\\
+&=\int_\Omega u_t(u_i-u_n)+k\nabla u_t\cdot[(1-\theta)\nabla u_n+\theta\nabla u_i]\,d\mathbf x
+\end{align}
+Note that the surface terms are 0 due to the Neumann boundary condition. 
+
+In UFL, this can be written as:
+\begin{verbatim}
+F = (k*inner(grad(u_t),theta*grad(u_i)
+    +(1-theta)*grad(u_n))+inner(u_t,(u_i-u_n)))*dx
+\end{verbatim}
 
 \subsubsection*{ii.}
+Differentiating F, we get the Jacobian:
+\begin{equation}
+J(u_i)=u_t-k\theta\nabla^2u_t
+\end{equation}
+after using the identity $\frac{\partial}{\partial u}(f\cdot\nabla u)=-\nabla f$.
+
+In UFL this can be done implicitly with:
+\begin{verbatim}
+J = derivative(F,us_i,us_a)
+\end{verbatim}
 
 \subsubsection*{iii.}
+The file \verb|diffusion.tfml| solves this problem with $\theta=0$. The file \verb|diffusion.shml| loops over the problem for $\theta=0,0.5,1$. The L1 error functional is included in the diagnostics.
 
 \subsubsection*{iv.}
 
 \subsubsection*{v.}
+For $\theta=0.1$, we have an L1 error of 8.7694862558e-05 at $t=0.012$ and $k=0.0002$. For $\theta=0.5$, we have an L1 error of 3.3144604514e-05 at $t=0.012$ and $k=0.0002$. Since the step error of the backwards Euler method is second order, we should get the same error when running with $k=0.0000285$. Using this timestep, we get an error of 3.1004511669e-05, which is actually slightly better than the trapezoidal scheme.
 \end{document}
